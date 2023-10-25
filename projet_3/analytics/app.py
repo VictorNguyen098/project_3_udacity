@@ -23,7 +23,8 @@ def readiness_check():
     try:
         with app.app_context():
             result = db.session.execute(text("""SELECT DISTINCT Count(token) FROM tokens"""))
-        return app.logger.info(str(result.fetchall()[0][0]))
+        app.logger.info(str(result.fetchall()[0][0]))
+        return "ok"
     except Exception as e:
         app.logger.error(e)
         return "failed", 500

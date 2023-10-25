@@ -1,8 +1,8 @@
 FROM python:3.10-slim-buster
 
-WORKDIR /analytics
+COPY  projet_3/analytics analytics
 
-COPY . .
+WORKDIR /analytics
 
 RUN apt update -y && apt install -y build-essential libpq-dev
 

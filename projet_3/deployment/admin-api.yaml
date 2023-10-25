@@ -6,10 +6,10 @@ spec:
   selector:
     app.kubernetes.io/name: admin-api
   ports:
-  - name: "5151"
+  - name: "5153"
     protocol: TCP
-    port: 5151
-    targetPort: 5151
+    port: 5153
+    targetPort: 5153
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -29,18 +29,18 @@ spec:
     spec:
       containers:
       - name: admin-api
-        image: analytics:0.1
+        image: 826446336745.dkr.ecr.us-east-1.amazonaws.com/project3:0.0.1
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
             path: /health_check
-            port: 5151
+            port: 5153
           initialDelaySeconds: 5
           timeoutSeconds: 2
         readinessProbe:
           httpGet:
             path: "/readiness_check"
-            port: 5151
+            port: 5153
           initialDelaySeconds: 5
           timeoutSeconds: 5
         env:

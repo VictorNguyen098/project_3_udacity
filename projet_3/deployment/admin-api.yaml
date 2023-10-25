@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: admin-api
-        image: 826446336745.dkr.ecr.us-east-1.amazonaws.com/project3:0.0.1
+        image: 826446336745.dkr.ecr.us-east-1.amazonaws.com/project3:0.0.2
         imagePullPolicy: Always
         livenessProbe:
           httpGet:

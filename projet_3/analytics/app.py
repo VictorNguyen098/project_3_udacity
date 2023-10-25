@@ -18,15 +18,17 @@ def health_check():
     return "ok"
 
 
-# @app.route("/readiness_check")
-# def readiness_check():
-#    try:
-#        count = db.session.query(Token).count()
-#     except Exception as e:
-#         app.logger.error(e)
-#         return "failed", 500
-#     else:
-#         return "ok"
+@app.route("/readiness_check")
+def readiness_check():
+    try:
+        with app.app_context():
+            result = db.session.execute(text("""SELECT DISTINCT Count(token) FROM tokens"""))
+            return app.logger.info(str(result.fetchall()[0][0]))
+    except Exception as e:
+        app.logger.error(e)
+        return "failed", 500
+    else:
+        return "ok"
 
 
 def get_daily_visits():

@@ -10,14 +10,6 @@ CREATE TABLE users
 CREATE INDEX users_is_active_index
   ON users (is_active);
 
-CREATE TABLE tokens
-  (
-     id         SERIAL NOT NULL CONSTRAINT tokens_pk PRIMARY KEY,
-     user_id    INTEGER NOT NULL CONSTRAINT tokens_users_id_fk REFERENCES users,
-     token      VARCHAR(6) NOT NULL,
-     created_at TIMESTAMP DEFAULT Now() NOT NULL,
-     used_at    TIMESTAMP
-  );
+CREATE TABLE tokens(id SERIAL NOT NULL CONSTRAINT tokens_pk PRIMARY KEY, user_id INTEGER NOT NULL CONSTRAINT tokens_users_id_fk REFERENCES users, token VARCHAR(6) NOT NULL, created_at TIMESTAMP DEFAULT Now() NOT NULL, used_at TIMESTAMP);
 
-CREATE INDEX tokens_user_id_token_used_at_index
-  ON tokens (user_id, token, used_at); 
+CREATE INDEX tokens_user_id_token_used_at_index ON tokens (user_id, token, used_at); 
